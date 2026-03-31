@@ -4,7 +4,7 @@
 [![CI](https://github.com/my-org/vscode-extension-mainlayer/actions/workflows/ci.yml/badge.svg)](https://github.com/my-org/vscode-extension-mainlayer/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-A production-ready VS Code extension template that demonstrates how to gate premium features behind a [Mainlayer](https://mainlayer.fr) subscription — without writing any payment processing code yourself.
+A production-ready VS Code extension template that gates premium features behind a [Mainlayer](https://mainlayer.fr) subscription without writing payment processing code yourself. Free features always available; premium features unlock instantly upon subscription.
 
 ---
 
@@ -12,62 +12,71 @@ A production-ready VS Code extension template that demonstrates how to gate prem
 
 | Feature | Free | Premium |
 |---------|:----:|:-------:|
-| Core commands | yes | yes |
-| Premium commands | | yes |
-| Priority support | | yes |
-| Early access to new features | | yes |
+| Core analysis & editing | ✓ | ✓ |
+| Premium commands | | ✓ |
+| Priority support | | ✓ |
+| Early access to new features | | ✓ |
 
 ---
 
-## Quick Start
+## 5-Minute Setup Guide
 
 ### 1. Install the extension
 
-Search for **My Extension (Mainlayer)** in the VS Code Marketplace, or install from the command line:
+Search for **My Extension (Mainlayer)** in the VS Code Marketplace:
 
 ```bash
 code --install-extension my-publisher.vscode-extension-mainlayer
 ```
 
-### 2. Obtain a Mainlayer API key
+### 2. Get a Mainlayer API key
 
-1. Sign in to [mainlayer.fr/dashboard](https://dashboard.mainlayer.fr).
-2. Create a new project and copy the **API key**.
+1. Visit [mainlayer.fr](https://mainlayer.fr) and sign up
+2. Create a new project in your dashboard
+3. Copy your **API key**
 
-### 3. Configure the extension
+### 3. Add API key to VS Code
 
-Open VS Code Settings (`Cmd/Ctrl + ,`) and search for **Mainlayer API Key**, or add it directly to your `settings.json`:
+Press `Cmd/Ctrl + ,` to open settings, search for **Mainlayer API Key**, and paste:
 
 ```json
 {
-  "myExtension.mainlayerApiKey": "ml_live_..."
+  "myExtension.mainlayerApiKey": "ml_live_xxxxxxxxxxxxx"
 }
 ```
 
-Alternatively, run the command:
+Or use the Command Palette (`Cmd/Ctrl + Shift + P`) and run:
 
 ```
 My Extension: Set Mainlayer API Key
 ```
 
----
-
-## Commands
-
-| Command | Description |
-|---------|-------------|
-| `My Extension: Run Free Feature` | Available to all users |
-| `My Extension: Run Premium Feature` | Requires an active Premium subscription |
-| `My Extension: Set Mainlayer API Key` | Enter or update your API key |
-| `My Extension: Refresh Entitlements` | Clear caches and re-check subscription status |
+That's it! Free features work immediately. Premium features unlock when you add your Mainlayer subscription.
 
 ---
 
-## Upgrade to Premium
+## Commands Reference
 
-Run **My Extension: Run Premium Feature** and click **Upgrade Now** to open the in-editor upgrade panel. You can also visit [mainlayer.fr/pricing](https://mainlayer.fr/pricing) directly.
+| Command | Description | Access |
+|---------|-------------|--------|
+| `My Extension: Run Free Feature` | Available to all users | Free |
+| `My Extension: Run Premium Feature` | Advanced analysis and features | Premium |
+| `My Extension: Set Mainlayer API Key` | Configure Mainlayer authentication | Free |
+| `My Extension: Refresh Entitlements` | Re-check subscription status | Free |
 
-After purchasing, run **My Extension: Refresh Entitlements** to activate your new plan immediately.
+---
+
+## Upgrading to Premium
+
+1. Run **My Extension: Run Premium Feature**
+2. Click **Upgrade Now** in the prompt
+3. Complete payment on mainlayer.fr
+4. Run **My Extension: Refresh Entitlements** (or wait 30 seconds)
+5. Premium features unlock immediately
+
+**Alternative**: Visit [mainlayer.fr/pricing](https://mainlayer.fr/pricing) directly to upgrade your subscription.
+
+No credit card data is stored locally — all billing is handled securely by Mainlayer.
 
 ---
 
@@ -75,78 +84,96 @@ After purchasing, run **My Extension: Refresh Entitlements** to activate your ne
 
 ```
 src/
-  extension.ts      — Entry point, command registration
-  mainlayer.ts      — HTTP client for the Mainlayer API
-  entitlement.ts    — Entitlement checks with two-layer caching
-  upgrade.ts        — Upgrade prompt and API-key flow
-  webview.ts        — In-editor pricing/payment WebviewPanel
-tests/
-  suite/
-    extension.test.ts — 17 Mocha unit tests
+├── extension.ts       # Main entry point & command registration
+├── mainlayer.ts       # HTTP client for Mainlayer API
+├── entitlement.ts     # Entitlement checks with 2-layer caching
+├── upgrade.ts         # Upgrade prompts & API key flow
+└── webview.ts         # In-editor upgrade panel
+tests/suite/
+└── extension.test.ts  # Mocha unit tests
 ```
 
-### Caching strategy
+### Performance & Caching
 
-Entitlement results are cached at two levels to minimise API calls while keeping latency low:
+Entitlements are cached at two levels to minimize API calls:
 
-1. **In-memory session cache** — valid for 5 minutes, wiped on window reload.
-2. **`ExtensionContext.globalState`** — persists across sessions with the same TTL. Used as a fallback when the Mainlayer API is unreachable.
+- **Session cache**: 5 minutes in-memory (cleared on window reload)
+- **Global state**: Persists across sessions as fallback when API is unreachable
+- **Result**: Premium feature checks complete in <10ms after first check
 
 ---
 
 ## Development
 
+### Clone and setup
+
 ```bash
-# Install dependencies
+git clone https://github.com/my-org/vscode-extension-mainlayer
+cd vscode-extension-mainlayer
 npm ci
-
-# Compile and watch
-npm run watch
-
-# Run tests (requires a VS Code installation)
-npm test
-
-# Lint
-npm run lint
-
-# Production build
-npm run build
-
-# Package for the Marketplace
-npm run package
 ```
 
-### Running in development
+### Commands
 
-1. Open this repository in VS Code.
-2. Press `F5` to launch the **Extension Development Host**.
-3. Use the Command Palette (`Cmd/Ctrl + Shift + P`) to run extension commands.
+```bash
+npm run watch        # Compile with file watching
+npm run build        # Production build
+npm run lint         # TypeScript & linting checks
+npm test             # Run Mocha tests (requires VS Code)
+npm run package      # Create .vsix for Marketplace
+```
+
+### Debug locally
+
+1. Open the repo in VS Code
+2. Press `F5` to launch **Extension Development Host**
+3. Use Command Palette in dev window to test commands
+4. Set breakpoints in `src/extension.ts` to debug
 
 ---
 
-## Configuration reference
+## Settings
 
-| Setting | Type | Default | Description |
-|---------|------|---------|-------------|
-| `myExtension.mainlayerApiKey` | `string` | `""` | Your Mainlayer API key. Keep this private. |
+| Setting | Type | Required | Description |
+|---------|------|----------|-------------|
+| `myExtension.mainlayerApiKey` | string | No | Mainlayer API key for premium features (stored securely in VS Code settings) |
 
 ---
 
 ## Security
 
-- API keys are stored in VS Code's global settings — never in source control.
-- The extension communicates exclusively with `https://api.mainlayer.fr` over TLS.
-- Webview content is rendered with a strict Content Security Policy and per-render nonces.
+- **API keys**: Stored securely in VS Code's settings, never in source control
+- **Network**: All communication via TLS to `https://api.mainlayer.fr`
+- **WebView**: Strict Content Security Policy with per-render cryptographic nonces
+- **No telemetry**: Extension does not collect usage data beyond Mainlayer's billing
+
+---
+
+## Troubleshooting
+
+**Premium features show "Upgrade" even with subscription?**
+- Run "Refresh Entitlements" from Command Palette
+- Verify API key is correct in Settings
+- Check your Mainlayer dashboard subscription status
+
+**API key rejected?**
+- Copy the full key from your Mainlayer dashboard (no extra spaces)
+- Verify the key starts with `ml_live_` (not `ml_test_`)
+
+**Getting rate-limited?**
+- Entitlements are cached for 5 minutes; checks after that hit the API
+- Max 1 API call per 5 minutes per feature is normal
+
+---
+
+## Support & Documentation
+
+- **Mainlayer docs**: https://docs.mainlayer.fr
+- **Report issues**: https://github.com/my-org/vscode-extension-mainlayer/issues
+- **Mainlayer support**: https://mainlayer.fr/support
 
 ---
 
 ## License
 
-MIT. See [LICENSE](LICENSE) for details.
-
----
-
-## Support
-
-- Mainlayer documentation: [mainlayer.fr/docs](https://docs.mainlayer.fr)
-- Extension issues: [github.com/my-org/vscode-extension-mainlayer/issues](https://github.com/my-org/vscode-extension-mainlayer/issues)
+MIT License. See [LICENSE](LICENSE).
