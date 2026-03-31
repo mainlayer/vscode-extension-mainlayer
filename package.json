@@ -1,0 +1,80 @@
+{
+  "name": "vscode-extension-mainlayer",
+  "displayName": "My Extension (Mainlayer)",
+  "description": "VS Code extension template with premium features powered by Mainlayer",
+  "version": "0.1.0",
+  "publisher": "my-publisher",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/my-org/vscode-extension-mainlayer"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "mainlayer",
+    "premium",
+    "template"
+  ],
+  "activationEvents": [],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "myExtension.freeFeature",
+        "title": "My Extension: Run Free Feature"
+      },
+      {
+        "command": "myExtension.premiumFeature",
+        "title": "My Extension: Run Premium Feature"
+      },
+      {
+        "command": "myExtension.setApiKey",
+        "title": "My Extension: Set Mainlayer API Key"
+      },
+      {
+        "command": "myExtension.refreshEntitlements",
+        "title": "My Extension: Refresh Entitlements"
+      }
+    ],
+    "configuration": {
+      "title": "My Extension",
+      "properties": {
+        "myExtension.mainlayerApiKey": {
+          "type": "string",
+          "default": "",
+          "description": "Your Mainlayer API key. Obtain one at https://mainlayer.xyz/dashboard.",
+          "markdownDescription": "Your **Mainlayer** API key. Obtain one at [mainlayer.xyz/dashboard](https://mainlayer.xyz/dashboard). Keep this value private — do not commit it to source control."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run build",
+    "build": "webpack --mode production",
+    "build:dev": "webpack --mode development",
+    "watch": "webpack --mode development --watch",
+    "test": "node ./out/tests/runTests.js",
+    "pretest": "tsc -p tsconfig.test.json",
+    "lint": "eslint src tests --ext ts",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.6",
+    "@types/node": "20.x",
+    "@types/vscode": "^1.85.0",
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "@vscode/test-electron": "^2.3.9",
+    "eslint": "^8.56.0",
+    "mocha": "^10.3.0",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.4.0",
+    "webpack": "^5.90.3",
+    "webpack-cli": "^5.1.4"
+  }
+}
