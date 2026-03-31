@@ -309,7 +309,7 @@ export class PaymentWebviewPanel {
 
   <footer>
     Payments and licensing are handled securely by
-    <a href="#" onclick="openExternal('https://mainlayer.xyz'); return false;">Mainlayer</a>.
+    <a href="#" onclick="openExternal('https://mainlayer.fr'); return false;">Mainlayer</a>.
     Your VS Code data is never shared.
   </footer>
 
@@ -317,7 +317,7 @@ export class PaymentWebviewPanel {
     const vscode = acquireVsCodeApi();
 
     function openPricing() {
-      vscode.postMessage({ command: 'openExternal', url: 'https://mainlayer.xyz/pricing' });
+      vscode.postMessage({ command: 'openExternal', url: 'https://mainlayer.fr/pricing' });
     }
 
     function enterKey() {

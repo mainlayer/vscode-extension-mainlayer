@@ -49,7 +49,7 @@ export class MainlayerClient {
       throw new MainlayerError('A valid Mainlayer API key is required')
     }
     this.apiKey = apiKey
-    this.baseUrl = options.baseUrl ?? 'https://api.mainlayer.xyz'
+    this.baseUrl = options.baseUrl ?? 'https://api.mainlayer.fr'
     this.timeoutMs = options.timeoutMs ?? 10_000
   }
 

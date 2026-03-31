@@ -4,7 +4,7 @@
 [![CI](https://github.com/my-org/vscode-extension-mainlayer/actions/workflows/ci.yml/badge.svg)](https://github.com/my-org/vscode-extension-mainlayer/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-A production-ready VS Code extension template that demonstrates how to gate premium features behind a [Mainlayer](https://mainlayer.xyz) subscription — without writing any payment processing code yourself.
+A production-ready VS Code extension template that demonstrates how to gate premium features behind a [Mainlayer](https://mainlayer.fr) subscription — without writing any payment processing code yourself.
 
 ---
 
@@ -31,7 +31,7 @@ code --install-extension my-publisher.vscode-extension-mainlayer
 
 ### 2. Obtain a Mainlayer API key
 
-1. Sign in to [mainlayer.xyz/dashboard](https://mainlayer.xyz/dashboard).
+1. Sign in to [mainlayer.fr/dashboard](https://dashboard.mainlayer.fr).
 2. Create a new project and copy the **API key**.
 
 ### 3. Configure the extension
@@ -65,7 +65,7 @@ My Extension: Set Mainlayer API Key
 
 ## Upgrade to Premium
 
-Run **My Extension: Run Premium Feature** and click **Upgrade Now** to open the in-editor upgrade panel. You can also visit [mainlayer.xyz/pricing](https://mainlayer.xyz/pricing) directly.
+Run **My Extension: Run Premium Feature** and click **Upgrade Now** to open the in-editor upgrade panel. You can also visit [mainlayer.fr/pricing](https://mainlayer.fr/pricing) directly.
 
 After purchasing, run **My Extension: Refresh Entitlements** to activate your new plan immediately.
 
@@ -135,7 +135,7 @@ npm run package
 ## Security
 
 - API keys are stored in VS Code's global settings — never in source control.
-- The extension communicates exclusively with `https://api.mainlayer.xyz` over TLS.
+- The extension communicates exclusively with `https://api.mainlayer.fr` over TLS.
 - Webview content is rendered with a strict Content Security Policy and per-render nonces.
 
 ---
@@ -148,5 +148,5 @@ MIT. See [LICENSE](LICENSE) for details.
 
 ## Support
 
-- Mainlayer documentation: [mainlayer.xyz/docs](https://mainlayer.xyz/docs)
+- Mainlayer documentation: [mainlayer.fr/docs](https://docs.mainlayer.fr)
 - Extension issues: [github.com/my-org/vscode-extension-mainlayer/issues](https://github.com/my-org/vscode-extension-mainlayer/issues)

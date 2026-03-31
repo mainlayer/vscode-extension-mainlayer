@@ -29,7 +29,7 @@ export async function showUpgradePrompt(
   if (choice === 'Upgrade Now') {
     await openUpgradeWebview(client, feature)
   } else if (choice === 'Learn More') {
-    await vscode.env.openExternal(vscode.Uri.parse('https://mainlayer.xyz/pricing'))
+    await vscode.env.openExternal(vscode.Uri.parse('https://mainlayer.fr/pricing'))
   }
 }
 
@@ -48,7 +48,7 @@ export async function openUpgradeWebview(
     void vscode.window.showErrorMessage(
       'Unable to load pricing information. Opening Mainlayer pricing page instead.'
     )
-    await vscode.env.openExternal(vscode.Uri.parse('https://mainlayer.xyz/pricing'))
+    await vscode.env.openExternal(vscode.Uri.parse('https://mainlayer.fr/pricing'))
   }
 }
 
